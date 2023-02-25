@@ -1,16 +1,31 @@
 ﻿using MediatR;
+using SprintTechnicalTesl.Applications.Factories;
+using SprintTechnicalTesl.Domains.BoardingCards;
+using System.Text;
 
 namespace SprintTechnicalTesl.Applications.Queries
 {
-    public class SortBoardingsCardsRequest : IRequest<IReadOnlyList<string>>
-    {
-    }
+    public record SortBoardingsCardsRequest(IReadOnlyList<BoardingCardRequest> BoardingCardRequests) : IRequest<string>;
 
-    public class SortBoardingsCardsRequestHandler : IRequestHandler<SortBoardingsCardsRequest, IReadOnlyList<string>>
+    public class SortBoardingsCardsRequestHandler : IRequestHandler<SortBoardingsCardsRequest, string>
     {
-        public Task<IReadOnlyList<string>> Handle(SortBoardingsCardsRequest request, CancellationToken cancellationToken)
+        public Task<string> Handle(SortBoardingsCardsRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            List<BoardingCard> boardingCards = request.BoardingCardRequests.Select(card => BoardingCardFactory.Create(card))
+                                                                           .ToList();
+
+            IReadOnlyList<BoardingCard> sortedBoardingCards = boardingCards.SortBoardingCards();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (var card in sortedBoardingCards)
+            {
+                stringBuilder.AppendLine(card.Print());
+            }
+
+            stringBuilder.AppendLine("You have arrived at your final destination.");
+
+            return Task.FromResult(stringBuilder.ToString());
         }
     }
 }

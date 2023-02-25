@@ -54,8 +54,7 @@
                 throw new BoardingCardException("Can't sort BoardingCards : Can't identify the first step");
             }
 
-            BoardingCard firstStepBoardingCard = firstSteps.First();
-            return firstStepBoardingCard;
+            return firstSteps.First();
         }
     }
 }
