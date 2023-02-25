@@ -25,7 +25,6 @@ namespace SprintTechnicalTesl.Controllers
         }
 
         [HttpPost(Name = nameof(SortBoardingsCards))]
-        [Route(nameof(SortBoardingsCards))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
