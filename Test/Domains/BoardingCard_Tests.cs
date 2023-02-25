@@ -153,6 +153,51 @@ namespace Test.Domains
 
         }
 
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void Should_ThrowBoardingException_WhenSortBoardingCards_WithUnchainedBoardingCard()
+        {
+            BoardingCard geronaAirportBoardingCard = new FlightBoardingCard
+            {
+                Finish = "StockHolm",
+                Start = "Gerona Airport",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
 
+            BoardingCard geronaAirportBoardingCard2 = new FlightBoardingCard
+            {
+                Finish = "StockHolm",
+                Start = "Gerona Airport",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
+
+            BoardingCard aeroportBusBoardingCard = new AeroportBusBoardingCard(start: "Barcelona", finish: "Gerona Airport");
+
+            BoardingCard madridTrainBoardingCard = new TrainBoardingCard()
+            {
+                Finish = "Barcelona",
+                Start = "Madrid",
+                SeatNumber = "45B",
+                TransportNumber = "78A"
+            };
+
+            List<BoardingCard> boardingCards = new()
+            {
+                aeroportBusBoardingCard,
+                madridTrainBoardingCard,
+                geronaAirportBoardingCard,
+                geronaAirportBoardingCard2
+            };
+
+            Action act = () => boardingCards.SortBoardingCards();
+
+            act.Should().Throw<BoardingCardException>();
+        }
     }
 }
