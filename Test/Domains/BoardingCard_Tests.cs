@@ -119,7 +119,7 @@ namespace Test.Domains
 
         [Fact]
         [Trait("Category", "Unit")]
-        public void Should_ThrowBoardingException_WhenSortBoardingCards_WithUnchainedBoardingCard()
+        public void Should_ThrowBoardingException_WhenSortBoardingCards_WithNoFirstStep()
         {
             BoardingCard stockholmAirportBoardingCard = new FlightBoardingCard
             {
@@ -152,5 +152,7 @@ namespace Test.Domains
             act.Should().Throw<BoardingCardException>();
 
         }
+
+
     }
 }
