@@ -12,11 +12,11 @@ namespace SprintTechnicalTesl.Controllers
     public class BoardingsCardsController : ControllerBase
     {
         private readonly ILogger<BoardingsCardsController> _logger;
-        private readonly Mediator _mediator;
+        private readonly ISender _mediator;
         private readonly IValidator<SortBoardingsCardsRequest> _sortBoardingsCardsRequestValidator;
 
         public BoardingsCardsController(ILogger<BoardingsCardsController> logger,
-                                        Mediator mediator,
+                                        ISender mediator,
                                         IValidator<SortBoardingsCardsRequest> sortBoardingsCardsRequestValidator)
         {
             _logger = logger;
@@ -24,7 +24,7 @@ namespace SprintTechnicalTesl.Controllers
             _sortBoardingsCardsRequestValidator = sortBoardingsCardsRequestValidator;
         }
 
-        [HttpGet(Name = nameof(SortBoardingsCards))]
+        [HttpPost(Name = nameof(SortBoardingsCards))]
         public async Task<ActionResult<List<string>>> SortBoardingsCards([FromBody] List<BoardingCardRequest> boardingCardRequests)
         {
             try
