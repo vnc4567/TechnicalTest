@@ -2,8 +2,8 @@
 {
     public enum TransportMeans
     {
-        AeroportBus,
-        Train,
-        Flight
+        AeroportBus = 1,
+        Train = 2,
+        Flight = 3
     }
 }

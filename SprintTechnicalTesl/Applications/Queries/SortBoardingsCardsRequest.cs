@@ -16,7 +16,7 @@ namespace SprintTechnicalTesl.Applications.Queries
 
             IReadOnlyList<BoardingCard> sortedBoardingCards = boardingCards.SortBoardingCards();
 
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             foreach (var card in sortedBoardingCards)
             {

@@ -7,7 +7,7 @@ namespace SprintTechnicalTesl.Validators
     {
         public SortBoardingsCardsRequestValidator()
         {
-            //RuleForEach(x => x.BoardingCardRequests).SetValidator(new BoardingCardRequestValidator());
+            RuleForEach(x => x.BoardingCardRequests).SetValidator(new BoardingCardRequestValidator());
         }
     }
 }
