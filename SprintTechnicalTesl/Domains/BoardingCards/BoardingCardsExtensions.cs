@@ -39,6 +39,11 @@
 
                 result.Add(nextStepBoardingCard);
 
+                if (result.Count > cards.Count)
+                {
+                    throw new BoardingCardException("Can't sort BoardingCards : There is a cycle");
+                }
+
                 nextStep = nextStepBoardingCard.Finish;
             }
 

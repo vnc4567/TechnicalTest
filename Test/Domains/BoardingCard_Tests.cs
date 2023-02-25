@@ -199,5 +199,62 @@ namespace Test.Domains
 
             act.Should().Throw<BoardingCardException>();
         }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void Should_ThrowBoardingException_WhenSortBoardingCards_WithCycleBoardingCard()
+        {
+            BoardingCard stockholmAirportBoardingCard = new FlightBoardingCard
+            {
+                Finish = "StockHolm",
+                Start = "Gerona Airport",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
+
+            BoardingCard parisBoardingCard = new FlightBoardingCard
+            {
+                Finish = "Paris",
+                Start = "StockHolm",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
+
+            BoardingCard geronaAirportBoardingCard3 = new FlightBoardingCard
+            {
+                Finish = "Gerona Airport",
+                Start = "Paris",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
+
+            BoardingCard firstStep = new FlightBoardingCard
+            {
+                Finish = "Gerona Airport",
+                Start = "Madrid",
+                SeatNumber = "3A",
+                TransportNumber = "SK455",
+                Comment = "Baggage drop at ticket counter 344",
+                GateNumber = "45B"
+            };
+
+            List<BoardingCard> boardingCards = new()
+            {
+                firstStep,
+                stockholmAirportBoardingCard,
+                geronaAirportBoardingCard3,
+                parisBoardingCard
+            };
+
+            Action act = () => boardingCards.SortBoardingCards();
+
+            act.Should().Throw<BoardingCardException>();
+        }
     }
 }
