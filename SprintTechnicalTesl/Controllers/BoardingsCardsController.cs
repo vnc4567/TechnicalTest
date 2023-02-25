@@ -25,6 +25,10 @@ namespace SprintTechnicalTesl.Controllers
         }
 
         [HttpPost(Name = nameof(SortBoardingsCards))]
+        [Route(nameof(SortBoardingsCards))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<string>>> SortBoardingsCards([FromBody] List<BoardingCardRequest> boardingCardRequests)
         {
             try

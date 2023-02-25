@@ -32,7 +32,7 @@
 
                 if (nextStepsBoardingCards.Count() != 1)
                 {
-                    throw new BoardingCardException($"Can't sort BoardingCards : Can't determine the step after : {nextStep}");
+                    throw new BoardingCardException($"Can't sort BoardingCards : Can't identify the step after : {nextStep}");
                 }
 
                 BoardingCard nextStepBoardingCard = nextStepsBoardingCards.First();
